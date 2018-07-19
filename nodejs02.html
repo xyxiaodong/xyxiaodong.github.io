@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>http和文件模块</title>
+</head>
+
+<body>
+    <h3>http和文件模块</h3>
+    <ol>
+        <li>引入http模块
+            <xmp>let http = require('http');</xmp>
+        </li>
+        <li>开启服务并监听
+            <xmp>
+            http.createServer(function(request,response){ 
+                response.end('hello word');}).listen(80,'192.168.72.86',function(){
+            console.log('success'); 
+              })
+            </xmp>
+        </li>
+        <li>引入文件模块:
+                <xmp>let fs = require('fs');</xmp>
+        </li>
+        <li>读取文件:<xmp>
+                fs.readFile('./data/12.http模块结合fs模块.avi',(err,data)=>{
+                    // fs.readFile('./07.testES6123213123.html','utf-8',function(err,data){
+                        // console.log(err);
+                        // console.log(data);
+                        // 如果有错误 打印错误信息
+                        if(err){
+                            console.log(err);
+                        }else{
+                            console.log(data);
+                        }
+                        // 没有错误 成功了 读取出来的数据
+                    })
+        </xmp></li>
+
+        <li>安装自动编译nodejs的包<xmp>npm install nodemon --registry=https://registry.npm.taobao.org</xmp></li>
+    </ol>
+</body>
+
+</html>

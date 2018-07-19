@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>兼容处理</title>
+    <style>
+        body {
+            font-size: 16px;
+        }
+
+        nav>a {
+            margin-left: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <a href="#setTxt">设置文本</a>
+        <a href="#getTxt">获取文本</a>
+        <a href="#getNextEle">获取下一个元素节点</a>
+        <a href="#getPreviousEle">获取上一个元素节点</a>
+    </nav>
+    <h1>兼容处理</h1>
+    <h3 id="setTxt">设置文本</h3>
+    <xmp>
+        <script>
+            //设置文本
+            function setText(ele, txt) {
+                //浏览器能力检测
+                if (ele.textContent == undefined) {
+                    //说明当前这个浏览器是ie8及以前的浏览器.
+                    ele.innerText = txt;
+                } else {
+                    //说明当前这浏览器是谷歌/火狐...
+                    ele.textContent = txt;
+                }
+            }
+        </script>
+    </xmp>
+    <h3 id="getTxt">获取文本</h3>
+    <xmp>
+        <script>
+            //获取文本
+            function getText(ele) {
+                //浏览器的能力检测(检测当前打开这个代码的浏览器支持什么),做判断
+                if (ele.textContent == undefined) {
+                    //说明当前这个浏览器是ie8及以前的浏览器.
+                    return ele.innerText;
+                } else {
+                    //说明当前这浏览器是谷歌/火狐...
+                    return ele.textContent;
+                }
+            }
+        </script>
+    </xmp>
+    <h3 id="getNextEle">获取下一个元素</h3>
+    <xmp>
+        <script>
+            //3.就是要获取下一个元素,所以要做兼容处理
+            function getNextElement(ele) {
+                //能力检测(检测当前这个浏览器支持不支持这个属性)
+                if (ele.nextElementSibling != undefined) {
+                    //说明当前浏览器是谷歌/火狐/ie9及以后的啦
+                    return ele.nextElementSibling;
+                } else {
+                    //说明当前这个浏览器是ie8及以前的.
+                    var node = ele.nextSibling; //这个拿到的下一个节点有可能是元素/文本/注释
+                    while (node.nodeType != 1) {
+                        node = node.nextSibling;
+                    }
+                    return node;
+                }
+            }
+        </script>
+    </xmp>
+    <h3 id="getPreviousEle">获取上一个元素节点</h3>
+    <xmp>
+        <script>
+            //3.兼容处理
+            function getPreviousElement(ele) {
+                //能力检测
+                if (ele.previousElementSibling != undefined) {
+                    //说明当前的浏览器是谷歌/火狐/ie9以后的
+                    return ele.previousElementSibling;
+                } else {
+                    //说明是ie8及以前的浏览器
+                    var node = ele.previousSibling; //这个节点有可能是文本和注释.
+                    while (node.nodeType != 1) {
+                        node = node.previousSibling;
+                    }
+                    return node;
+                }
+            }
+        </script>
+    </xmp>
+</body>
+
+</html>
