@@ -23,6 +23,7 @@
         <a href="#getTxt">获取文本</a>
         <a href="#getNextEle">获取下一个元素节点</a>
         <a href="#getPreviousEle">获取上一个元素节点</a>
+        <a href="#getFirstElementChild">获取第一个子元素节点</a>
     </nav>
     <h1>兼容处理</h1>
     <h3 id="setTxt">设置文本</h3>
@@ -91,6 +92,25 @@
                     var node = ele.previousSibling; //这个节点有可能是文本和注释.
                     while (node.nodeType != 1) {
                         node = node.previousSibling;
+                    }
+                    return node;
+                }
+            }
+        </script>
+    </xmp>
+    <h3 id="getFirstElementChild">获取第一个子元素节点</h3>
+    <xmp>
+        <script>
+            function getFirstElementChild(ele) {
+                //能力检测
+                if (ele.firstElementChild) {
+                    //如果到了这里,说明当前的浏览器是谷歌,火狐,ie9及以后
+                    return ele.firstElementChild;
+                } else {
+                    //如果到了这里,就说明当前的浏览器是ie8及以前的.
+                    var node = ele.firstChild; //这个节点有可能是文本和注释.
+                    while (node.nodeType != 1) {
+                        node = node.nextSibling;
                     }
                     return node;
                 }
